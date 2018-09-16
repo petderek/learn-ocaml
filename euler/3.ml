@@ -6,13 +6,11 @@ let rec isPrime x y =
 
 let prime = fun x -> isPrime x (x-1);;
 
-let rec findBiggestPrime x y =
-    if x = y then x
-    else if prime y && x mod y = 0 then
-        getMax y (findBiggestPrime (x / y) 2)
-    else
-        findBiggestPrime x (y + 1);;
-
-let biggestPrime = fun x -> findBiggestPrime x 2;;
+let rec biggestPrime x =
+    let rec loop i = 
+        if x = i then x
+        else if prime i && x mod i = 0 then getMax i (biggestPrime (x / i))
+        else loop (i+1) in
+    loop(2);;
 
 print_endline ("Problem 3: " ^ string_of_int (biggestPrime 600851475143));;
