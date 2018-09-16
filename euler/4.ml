@@ -13,14 +13,14 @@ let rec isPalindromeStr x = match (String.length x) with
 
 let isPalindrome x = isPalindromeStr (string_of_int x);;
 
-(* I can't figure out how to recursive this. *)
-let max = ref 0;;
-let loop = ref 0;;
-for i = 999 downto 1 do
-    for j = 999 downto 1 do
-        loop := i * j;
-        max := if (isPalindrome !loop) && (!loop > !max) then !loop else !max;
-    done;
-done;
+let rec findPalindromes i = 
+    let rec loop j = 
+        if isPalindrome (i*j) then (i*j) (*biggest j for given i*)
+        else if j = 0 then 0
+        else loop(j-1) in
+    if i = 0 then 0 else
+    let trial = loop i in
+    let next = findPalindromes(i-1) in
+    if trial > next then trial else next;;
 
-print_endline ("Problem 4: " ^ (string_of_int !max));;
+print_endline ("Problem 4: " ^ (string_of_int (findPalindromes 999)));;
