@@ -1,12 +1,12 @@
-(* Find the sum of all multiples of 3 or 5 below 100 *)
-let sum = ref 0;;
+(* Find the sum of all multiples of 3 or 5 below 1000 *)
 
-let checkMultiple = fun y x -> (x mod y) = 0;;
+let checkMultiple y x = (x mod y) = 0;;
 let mult3 = checkMultiple 3;;
 let mult5 = checkMultiple 5;;
 
-for i = 1 to 999 do
-  if mult3 i || mult5 i then sum :=  !sum + i
-done;;
+let rec sum x =
+  if mult3 x || mult5 x then x + sum (x-1)
+  else if x > 0 then sum (x-1)
+  else 0;;
 
-print_endline ("Problem 1: " ^ string_of_int !sum);;
+print_endline ("Problem 1: " ^ string_of_int (sum 999));;
