@@ -8,6 +8,8 @@
 *.cmxs
 *.cmxa
 *.out
+tail-call
+not-optimized
 
 # ocamlbuild working directory
 _build/
