@@ -4,9 +4,11 @@ let checkMultiple y x = (x mod y) = 0;;
 let mult3 = checkMultiple 3;;
 let mult5 = checkMultiple 5;;
 
-let rec sum x =
-  if mult3 x || mult5 x then x + sum (x-1)
-  else if x > 0 then sum (x-1)
-  else 0;;
+let sum x =
+  let rec sum i total = 
+    if mult3 i || mult5 i then sum (i-1) (i+total)
+    else if i > 0 then sum (i-1) total
+    else total in
+  sum x 0;;
 
 print_endline ("Problem 1: " ^ string_of_int (sum 999));;
