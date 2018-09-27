@@ -8,6 +8,13 @@ run-%: %.out
 	@./$<
 	@rm -f $<
 
+boggle: puzzle/puzzle.ml
+	@ocamlc -o $@ puzzle/puzzle.ml
+
+.PHONY: run-boggle
+run-boggle: boggle
+	./boggle
+
 .PHONY: neat run-neat
 neat: tail-call not-optimized
 tail-call: neat/tail-call.ml
